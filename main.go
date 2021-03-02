@@ -10,7 +10,7 @@ import (
 )
 
 func main() {
-	tour9()
+	tour12()
 }
 
 func add(x, y int) (result int) {
@@ -150,4 +150,31 @@ func tour9() {
 	default:
 		fmt.Println("Too far away!")
 	}
+}
+
+func tour10() {
+	t := time.Now()
+	switch {
+	case t.Hour() < 12:
+		fmt.Println("Good morning!")
+	case t.Hour() < 17:
+		fmt.Println("Good afternoon.")
+	default:
+		fmt.Println("Good evening.")
+	}
+}
+
+func tour11() {
+	defer fmt.Println("world")
+	fmt.Println("Hello")
+}
+
+func tour12() {
+	fmt.Println("Start")
+
+	for i := 0; i < 10; i++ {
+		defer fmt.Println(i)
+	}
+
+	fmt.Println("End")
 }
