@@ -174,3 +174,27 @@ func tour12() {
 
 	fmt.Println("End")
 }
+
+func tour13() {
+	i, j := 42, 2701
+
+	p := &i
+	fmt.Println(*p)
+	*p = 21
+	fmt.Println(i)
+
+	p = &j
+	*p = *p / 37
+	fmt.Println(i)
+}
+
+type vertex struct {
+	x int
+	y int
+}
+
+func tour14() {
+	v := vertex{1, 2}
+	v.x = 4
+	fmt.Println(v.x)
+}
