@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"golang.org/x/tour/pic"
+	"golang.org/x/tour/wc"
 )
 
 func add(x, y int) (result int) {
@@ -420,4 +421,56 @@ func printS(s [][]uint8) {
 
 func tour28() {
 	pic.Show(grayscale)
+}
+
+type vertex1 struct {
+	Lat, Long float64
+}
+
+var m = map[string]vertex1{
+	"Bell":   vertex1{40.1234, -74.1234},
+	"Google": {40.1234, -74.1234},
+}
+
+func tour29() {
+	fmt.Println(m)
+}
+
+func tour30() {
+	m := make(map[string]int)
+
+	m["Answer"] = 42
+	fmt.Println("The value:", m["Answer"])
+
+	m["Answer"] = 48
+	fmt.Println("The value:", m["Answer"])
+
+	delete(m, "Answer")
+	fmt.Println("The value:", m["Answer"])
+
+	v, ok := m["Answer"]
+	fmt.Println("The value:", v, "Present?", ok)
+}
+
+func WordCount(s string) map[string]int {
+	result := make(map[string]int)
+	words := strings.Fields(s)
+
+	for i, str := range words {
+		count := 1
+		for j := range words {
+			if i == j {
+				continue
+			} else if words[i] == words[j] {
+				count++
+			}
+		}
+		result[str] = count
+	}
+
+	return result
+}
+
+func tour31() {
+	wc.Test(WordCount)
 }
