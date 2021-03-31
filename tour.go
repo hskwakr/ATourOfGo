@@ -488,3 +488,51 @@ func tour32() {
 	fmt.Println(compute(hypot))
 	fmt.Println(compute(math.Pow))
 }
+
+func adder() func(int) int {
+	sum := 0
+	return func(x int) int {
+		sum += x
+		return sum
+	}
+}
+func tour33() {
+	pos, neg := adder(), adder()
+	for i := 0; i < 10; i++ {
+		fmt.Println(
+			pos(i),
+			neg(-2*i),
+		)
+	}
+}
+
+func fibonacci() func() int {
+	previous1 := 0
+	previous2 := 0
+	result := 0
+
+	return func() int {
+		if previous1 == 0 && previous2 == 0 {
+			previous2 = 1
+			result = 0
+		} else if previous1 == 0 && previous2 == 1 {
+			previous1 = 1
+			result = 1
+		} else if previous1 == 1 && previous2 == 1 {
+			previous2 = 2
+		} else {
+			result = previous1 + previous2
+			previous1 = previous2
+			previous2 = result
+		}
+
+		return result
+	}
+}
+
+func tour34() {
+	f := fibonacci()
+	for i := 0; i < 10; i++ {
+		fmt.Println(f())
+	}
+}
