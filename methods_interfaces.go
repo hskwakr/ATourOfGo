@@ -53,3 +53,28 @@ func tour37() {
 	fmt.Println(p.abs())
 	fmt.Println(absFunc(*p))
 }
+
+type abser interface {
+	abs() float64
+}
+
+type myFloat float64
+
+func (f myFloat) abs() float64 {
+	if f < 0 {
+		return float64(-f)
+	}
+	return float64(f)
+}
+
+func tour38() {
+	var a abser
+	f := myFloat(-math.Sqrt2)
+	v := vertex2{3, 4}
+
+	a = f
+	fmt.Println(a.abs())
+
+	a = v
+	fmt.Println(a.abs())
+}
