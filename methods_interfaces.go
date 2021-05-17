@@ -117,3 +117,18 @@ func tour40() {
 	describe(i)
 	i.M()
 }
+
+func describe1(i interface{}) {
+	fmt.Printf("(%v, %T)\n", i, i)
+}
+
+func tour41() {
+	var i interface{}
+	describe1(i)
+
+	i = 42
+	describe1(i)
+
+	i = "hello"
+	describe1(i)
+}
