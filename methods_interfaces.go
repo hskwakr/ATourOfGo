@@ -78,3 +78,20 @@ func tour38() {
 	a = v
 	fmt.Println(a.abs())
 }
+
+type I interface {
+	M()
+}
+
+type T struct {
+	S string
+}
+
+func (t T) M() {
+	fmt.Println(t.S)
+}
+
+func tour39() {
+	var i I = T{"Hello"}
+	i.M()
+}
