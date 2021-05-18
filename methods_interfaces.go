@@ -217,3 +217,33 @@ func tour46() {
 		fmt.Println(err)
 	}
 }
+
+type ErrNegativeSqrt float64
+
+func (e *ErrNegativeSqrt) Error() string {
+	v := fmt.Sprint(float64(*e))
+	return fmt.Sprintf("cannot Sqrt negative number: %v", v)
+}
+
+func sqrt1(x float64) (float64, error) {
+	z := 1.0
+	if x < 0.0 {
+		e := ErrNegativeSqrt(x)
+		return x, &e
+	}
+
+	for i := 0; i <= 10; i++ {
+		amount := (z*z - x) / (2 * z)
+		z -= amount
+
+		if amount > 0 && amount < 1e-16 {
+			break
+		}
+	}
+	return z, nil
+}
+
+func tour47() {
+	fmt.Println(sqrt1(2))
+	fmt.Println(sqrt1(-2))
+}

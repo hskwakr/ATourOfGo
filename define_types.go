@@ -36,22 +36,10 @@ func tour6() {
 	fmt.Println(pow(3, 2, 10), pow(3, 3, 20))
 }
 
-func sqrt1(x float64) float64 {
-	z := 1.0
-	for i := 0; i <= 10; i++ {
-		amount := (z*z - x) / (2 * z)
-		z -= amount
-
-		if amount > 0 && amount < 1e-16 {
-			break
-		}
-	}
-	return z
-}
-
 func tour7() {
 	fmt.Println("math.Sqrt:", math.Sqrt(2))
-	fmt.Println("Sqrt     :", sqrt1(2))
+	sqrt, _ := sqrt1(2)
+	fmt.Println("Sqrt     :", sqrt)
 }
 
 func tour8() {
