@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"math"
+	"time"
 )
 
 type vertex2 struct {
@@ -192,5 +193,27 @@ func tour45() {
 
 	for name, ip := range hosts {
 		fmt.Printf("%v: %v\n", name, ip)
+	}
+}
+
+type myError struct {
+	when time.Time
+	what string
+}
+
+func (e *myError) Error() string {
+	return fmt.Sprintf("at %v, %s", e.when, e.what)
+}
+
+func run() error {
+	return &myError{
+		time.Now(),
+		"it didn't work",
+	}
+}
+
+func tour46() {
+	if err := run(); err != nil {
+		fmt.Println(err)
 	}
 }
