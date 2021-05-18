@@ -177,3 +177,20 @@ func tour44() {
 	z := person{"Zaphod", 9001}
 	fmt.Println(a, z)
 }
+
+type ipAddr [4]byte
+
+func (ip ipAddr) String() string {
+	return fmt.Sprintf("%v.%v.%v.%v", ip[0], ip[1], ip[2], ip[3])
+}
+
+func tour45() {
+	hosts := map[string]ipAddr{
+		"loopback":  {127, 0, 0, 1},
+		"googleDNS": {8, 8, 8, 8},
+	}
+
+	for name, ip := range hosts {
+		fmt.Printf("%v: %v\n", name, ip)
+	}
+}
