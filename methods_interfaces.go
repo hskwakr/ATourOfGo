@@ -168,9 +168,9 @@ type person struct {
 	age  int
 }
 
-//func (p person) String() string {
-//	return fmt.Sprintf("%v (%v years)", p.name, p.age)
-//}
+func (p person) String() string {
+	return fmt.Sprintf("%v (%v years)", p.name, p.age)
+}
 
 func tour44() {
 	a := person{"Arthur", 42}
