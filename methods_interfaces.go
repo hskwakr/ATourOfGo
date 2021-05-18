@@ -132,3 +132,16 @@ func tour41() {
 	i = "hello"
 	describe1(i)
 }
+
+func tour42() {
+	var i interface{} = "hello"
+
+	s := i.(string)
+	fmt.Println(s)
+
+	s, ok := i.(string)
+	fmt.Println(s, ok)
+
+	f, ok := i.(float64)
+	fmt.Println(f, ok)
+}
