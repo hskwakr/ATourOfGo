@@ -162,3 +162,18 @@ func tour43() {
 	do("hello")
 	do(true)
 }
+
+type person struct {
+	name string
+	age  int
+}
+
+//func (p person) String() string {
+//	return fmt.Sprintf("%v (%v years)", p.name, p.age)
+//}
+
+func tour44() {
+	a := person{"Arthur", 42}
+	z := person{"Zaphod", 9001}
+	fmt.Println(a, z)
+}
