@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"math"
+	"strings"
 	"time"
 )
 
@@ -246,4 +248,17 @@ func sqrt1(x float64) (float64, error) {
 func tour47() {
 	fmt.Println(sqrt1(2))
 	fmt.Println(sqrt1(-2))
+}
+
+func tour48() {
+	r := strings.NewReader("Hello, Reader!")
+	b := make([]byte, 8)
+	for {
+		n, err := r.Read(b)
+		fmt.Printf("n = %v err = %v b = %v\n", n, err, b)
+		fmt.Printf("b[:n] = %v\n", b[:n])
+		if err == io.EOF {
+			break
+		}
+	}
 }
