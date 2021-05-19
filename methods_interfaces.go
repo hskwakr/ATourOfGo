@@ -3,11 +3,13 @@ package main
 import (
 	"fmt"
 	"image"
+	"image/color"
 	"io"
 	"math"
 	"strings"
 	"time"
 
+	"golang.org/x/tour/pic"
 	"golang.org/x/tour/reader"
 )
 
@@ -283,4 +285,26 @@ func tour50() {
 	m := image.NewRGBA(image.Rect(0, 0, 100, 100))
 	fmt.Println(m.Bounds())
 	fmt.Println(m.At(0, 0).RGBA())
+}
+
+type image1 struct{}
+
+func (img *image1) ColorModel() color.Model {
+	return color.RGBAModel
+}
+
+func (img *image1) Bounds() image.Rectangle {
+	return image.Rect(0, 0, 100, 100)
+}
+
+func (img *image1) At(x, y int) color.Color {
+	v := uint8(x ^ y)
+	//v := uint8((x+y)/2)
+	//v := uint8(x * y)
+	return color.RGBA{v, v, 255, 255}
+}
+
+func tour51() {
+	m := image1{}
+	pic.ShowImage(&m)
 }
