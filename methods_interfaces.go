@@ -6,6 +6,8 @@ import (
 	"math"
 	"strings"
 	"time"
+
+	"golang.org/x/tour/reader"
 )
 
 type vertex2 struct {
@@ -261,4 +263,17 @@ func tour48() {
 			break
 		}
 	}
+}
+
+type myReader struct{}
+
+func (r *myReader) Read(p []byte) (n int, err error) {
+	for i := range p {
+		p[i] = 'A'
+	}
+	return len(p), nil
+}
+
+func tour49() {
+	reader.Validate(&myReader{})
 }
