@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"time"
+
+	"golang.org/x/tour/tree"
 )
 
 func say(s string) {
@@ -84,4 +86,56 @@ func tour56() {
 		quit <- 0
 	}()
 	fibonacci2(c, quit)
+}
+
+func tour57() {
+	tick := time.Tick(100 * time.Millisecond)
+	boom := time.After(500 * time.Millisecond)
+
+	for {
+		select {
+		case <-tick:
+			fmt.Println("tick.")
+		case <-boom:
+			fmt.Println("BOOM!")
+			return
+		default:
+			fmt.Println("    .")
+			time.Sleep(50 * time.Millisecond)
+		}
+	}
+}
+
+func Walk(t *tree.Tree, ch chan int) {
+	ch <- t.Value
+	if t.Right != nil {
+		Walk(t.Right, ch)
+	}
+	if t.Left != nil {
+		Walk(t.Left, ch)
+	}
+}
+
+func Same(t1, t2 *tree.Tree) bool {
+	c1 := make(chan int)
+	c2 := make(chan int)
+	go Walk(t1, c1)
+	go Walk(t2, c2)
+
+	var x, y int
+	for i := 0; i < 10; i++ {
+		x += <-c1
+		y += <-c2
+	}
+
+	if x == y {
+		return true
+	} else {
+		return false
+	}
+}
+
+func tour58() {
+	fmt.Println(Same(tree.New(1), tree.New(1)))
+	fmt.Println(Same(tree.New(1), tree.New(3)))
 }
