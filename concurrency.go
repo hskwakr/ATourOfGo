@@ -107,13 +107,17 @@ func tour57() {
 }
 
 func Walk(t *tree.Tree, ch chan int) {
-	ch <- t.Value
-	if t.Right != nil {
-		Walk(t.Right, ch)
+	var walker func(t *tree.Tree)
+	walker = func(t *tree.Tree) {
+		if t == nil {
+			return
+		}
+		ch <- t.Value
+		walker(t.Left)
+		walker(t.Right)
 	}
-	if t.Left != nil {
-		Walk(t.Left, ch)
-	}
+	walker(t)
+	close(ch)
 }
 
 func Same(t1, t2 *tree.Tree) bool {
@@ -122,17 +126,28 @@ func Same(t1, t2 *tree.Tree) bool {
 	go Walk(t1, c1)
 	go Walk(t2, c2)
 
-	var x, y int
-	for i := 0; i < 10; i++ {
-		x += <-c1
-		y += <-c2
+	r := true
+	sumX, sumY := 0, 0
+	for {
+		x, ok1 := <-c1
+		y, ok2 := <-c2
+
+		sumX += x
+		sumY += y
+
+		if ok1 != ok2 {
+			r = false
+			break
+		}
+		if !ok1 && !ok2 {
+			break
+		}
 	}
 
-	if x == y {
-		return true
-	} else {
-		return false
+	if sumX != sumY {
+		r = false
 	}
+	return r
 }
 
 func tour58() {
