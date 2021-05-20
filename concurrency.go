@@ -35,3 +35,28 @@ func tour53() {
 
 	fmt.Println(x, y, x+y)
 }
+
+func tour54() {
+	ch := make(chan int, 2)
+	ch <- 1
+	ch <- 2
+	fmt.Println(<-ch)
+	fmt.Println(<-ch)
+}
+
+func fibonacci1(n int, c chan int) {
+	x, y := 0, 1
+	for i := 0; i < n; i++ {
+		c <- x
+		x, y = y, x+y
+	}
+	close(c)
+}
+
+func tour55() {
+	c := make(chan int, 10)
+	go fibonacci1(cap(c), c)
+	for i := range c {
+		fmt.Println(i)
+	}
+}
