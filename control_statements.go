@@ -337,24 +337,13 @@ func tour33() {
 }
 
 func fibonacci() func() int {
-	previous1 := 0
-	previous2 := 0
+	x := 0
+	y := 1
 	result := 0
 
 	return func() int {
-		if previous1 == 0 && previous2 == 0 {
-			previous2 = 1
-			result = 0
-		} else if previous1 == 0 && previous2 == 1 {
-			previous1 = 1
-			result = 1
-		} else if previous1 == 1 && previous2 == 1 {
-			previous2 = 2
-		} else {
-			result = previous1 + previous2
-			previous1 = previous2
-			previous2 = result
-		}
+		result = x
+		x, y = y, x+y
 
 		return result
 	}
